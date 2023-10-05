@@ -1,0 +1,99 @@
+<div class="container">
+    <h3 class="my-3">Edit Loan</h3>
+    <hr>
+    <!-- Template driven -->
+
+    <form name="frmPurchase" #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+        <!-- Loan Id -->
+        <div class="form-group">
+            <input type="hidden" name="loanId" readonly [(ngModel)]="adminService.formData.loanId" disabled>
+        </div>
+        <!-- Customer Name -->
+        <div class="form-group">
+            <label for="customerid">Name</label>
+            <input type="text" name="customerid" [(ngModel)]="adminService.formData.customer.customerName" #customerid="ngModel" class="form-control" placeholder="Enter order number" maxlength="25" required [ngClass]="{'is-invalid' : customerid.touched && customerid.invalid}">
+
+            <div class="alert alert-danger" *ngIf="customerid.touched && customerid.invalid">
+                <div *ngIf="customerid.errors.required">Customer Number is required</div>
+            </div>
+        </div>
+
+        <!-- Loan Amount -->
+        <div class="form-group">
+            <label for="loanAmt">Order Number</label>
+            <input type="text" name="loanAmt" [(ngModel)]="adminService.formData.loanAmt" #loanAmt="ngModel" class="form-control" placeholder="Enter order number" maxlength="25" required [ngClass]="{'is-invalid' : loanAmt.touched && loanAmt.invalid}">
+
+            <div class="alert alert-danger" *ngIf="loanAmt.touched && loanAmt.invalid">
+                <div *ngIf="loanAmt.errors.required">Amount is required</div>
+            </div>
+        </div>
+
+
+
+        <!-- Date of Request -->
+        <div class="form-group">
+            <label for="dateOfRequest">Order Date</label>
+            <input type="date" name="dateOfRequest" [(ngModel)]="adminService.formData.dateOfRequest" #dateOfRequest="ngModel" class="form-control" placeholder="Enter Employee order date" required [ngClass]="{'is-invalid' : dateOfRequest.touched && dateOfRequest.invalid}">
+
+            <div class="alert alert-danger" *ngIf="dateOfRequest.touched && dateOfRequest.invalid">
+                <div *ngIf="dateOfRequest.errors.required">Date of reqest is required</div>
+            </div>
+        </div>
+
+
+
+        <!-- Status -->
+        <div class="form-group">
+            <label for="loanStatus">Status</label>
+            <input type="text" name="loanStatus" [(ngModel)]="adminService.formData.loanStatus" #loanStatus="ngModel" class="form-control" placeholder="Enter order status" maxlength="25" required [ngClass]="{'is-invalid' : loanStatus.touched && loanStatus.invalid}">
+
+            <div class="alert alert-danger" *ngIf="loanStatus.touched && loanStatus.invalid">
+                <div *ngIf="loanStatus.errors.required">Status is required</div>
+            </div>
+        </div>
+        <!-- verification status -->
+        <div class="form-group">
+            <label for="bgVerification">Verification Status</label>
+            <input type="text" name="bgVerification" [(ngModel)]="adminService.formData.bgVerification" #bgVerification="ngModel" class="form-control" placeholder="Enter verification status" maxlength="25" required [ngClass]="{'is-invalid' : bgVerification.touched && bgVerification.invalid}">
+
+            <div class="alert alert-danger" *ngIf="bgVerification.touched && bgVerification.invalid">
+                <div *ngIf="bgVerification.errors.required">verification status is required</div>
+            </div>
+        </div>
+        <!-- Category -->
+        <div class="form-group">
+            <label for="loanCategory">Verification Status</label>
+            <input type="text" name="loanCategory" [(ngModel)]="adminService.formData.loanCategory" #loanCategory="ngModel" class="form-control" placeholder="Enter verification status" maxlength="25" required [ngClass]="{'is-invalid' : loanCategory.touched && loanCategory.invalid}">
+
+            <div class="alert alert-danger" *ngIf="loanCategory.touched && loanCategory.invalid">
+                <div *ngIf="loanCategory.errors.required">verification status is required</div>
+            </div>
+        </div>
+        <!-- Officer selection -->
+        <div class="form-group">
+            <label>
+                Officer
+            </label>
+            <select name="officerid" id="officerid" [(ngModel)]="adminService.formData.officerid" #officerid="ngModel" class="form-control">
+            <option value=0 selected disabled>--Select officer--</option>
+            <option *ngFor="let officer of adminService.officers" value="{{officer.officerId}}">{{officer.officerName}}</option>
+        </select>
+        </div>
+
+        <!-- is Active -->
+        <div class="form-group">
+            <div class="form-check">
+                <input type="checkbox" name="active" [(ngModel)]="adminService.formData.active" class="form-check-input">
+                <label class="form-check-label">Is in service</label><br>
+            </div>
+        </div>
+        <!-- Submit -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-outline-primary form-control" [disabled]="!(form.valid && form.dirty)">Update</button>
+            <br><br>
+            <button type="reset" class="btn btn-lg btn-outline-secondary form-control">Reset</button>
+
+        </div>
+    </form>
+
+</div>
